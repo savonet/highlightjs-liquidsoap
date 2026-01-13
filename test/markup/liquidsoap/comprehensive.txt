@@ -3,7 +3,7 @@
    #< nested #>
    comment #>
 
-# Keywords and control flow
+# Function and variable definitions
 def rec process(~id="default", ~timeout=30.0, source) =
   if source.is_ready() then
     source
@@ -14,8 +14,18 @@ def rec process(~id="default", ~timeout=30.0, source) =
   end
 end
 
+def simple_func(x)
+  x + 1
+end
+
+def x.method = 42 end
+def source.on_track(m) = log("Track: #{m}") end
+
+def replaces old_value = new_value end
 let eval x = 1 + 2
-let replaces old_value = new_value
+let x.property = "value"
+let json.parse data = '{"key": "value"}'
+let yaml.parse settings = config_string
 
 # Literals and numbers
 let flag = true
@@ -57,9 +67,6 @@ output.icecast(%opus(bitrate=128), mount="/hq", source)
 
 # Regexp
 is_valid = r/^[a-z]+$/i
-
-# Decorators
-let @json.parse data = '{"key": "value"}'
 
 # Lambda functions
 let double = fun(x) -> x * 2

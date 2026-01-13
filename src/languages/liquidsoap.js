@@ -96,12 +96,6 @@ export default function(hljs) {
     relevance: 10
   };
 
-  const DECORATOR = {
-    scope: 'meta',
-    begin: /@(?:json\.parse|yaml\.parse|xml\.parse|sqlite\.row|sqlite\.query)/,
-    relevance: 10
-  };
-
   const REGEXP = {
     scope: 'regexp',
     begin: /r\//,
@@ -137,16 +131,71 @@ export default function(hljs) {
     begin: /(?<=\.)[a-zA-Z_][a-zA-Z0-9_']*/
   };
 
-  const FUNCTION_DEFINITION = {
+  const DEFINITION_NAME_RE = /[a-zA-Z_][a-zA-Z0-9_']*(?:\.[a-zA-Z_][a-zA-Z0-9_']*)*/;
+
+  const DEF = {
     beginKeywords: 'def',
     end: /(?==|\(|$)/,
     contains: [
       {
+        scope: 'keyword',
+        begin: /\b(?:rec|replaces)\b/
+      },
+      {
         scope: 'title.function',
-        begin: IDENT_RE,
+        begin: DEFINITION_NAME_RE,
         relevance: 0
       }
     ]
+  };
+
+  const LET = {
+    beginKeywords: 'let',
+    end: /(?==|$)/,
+    contains: [
+      {
+        scope: 'keyword',
+        begin: /\b(?:eval)\b/
+      },
+      {
+        scope: 'meta',
+        begin: /json\.parse(?:\[[^\]]*\])?/,
+        relevance: 10
+      },
+      {
+        scope: 'meta',
+        begin: /(?:yaml|xml)\.parse|sqlite\.(?:row|query)/,
+        relevance: 10
+      },
+      {
+        scope: 'title.function',
+        begin: DEFINITION_NAME_RE,
+        relevance: 0
+      }
+    ]
+  };
+
+  const LAMBDA = {
+    begin: /\bfun\s*\(/,
+    end: /->/,
+    beginScope: 'keyword',
+    endScope: 'operator',
+    contains: [
+      LABEL,
+      {
+        scope: 'params',
+        begin: /\(/,
+        end: /\)/,
+        contains: [
+          LABEL,
+          {
+            scope: 'variable',
+            begin: IDENT_RE
+          }
+        ]
+      }
+    ],
+    relevance: 5
   };
 
   const FUNCTION_CALL = {
@@ -178,14 +227,15 @@ export default function(hljs) {
       NUMBER,
       ENCODER,
       PREPROCESSOR,
-      DECORATOR,
       REGEXP,
       TIME_INTERVAL,
       TIME_PREDICATE,
       VERSION,
       LABEL,
       METHOD,
-      FUNCTION_DEFINITION,
+      DEF,
+      LET,
+      LAMBDA,
       FUNCTION_CALL,
       TYPE,
       OPERATOR

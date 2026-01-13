@@ -1,6 +1,6 @@
 {
   "name": "highlightjs-liquidsoap",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Highlight.js grammar for Liquidsoap",
   "main": "src/languages/liquidsoap.js",
   "type": "module",
