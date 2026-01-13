@@ -1,0 +1,119 @@
+# Single line comment
+#< Multiline
+   #< nested #>
+   comment #>
+
+# Keywords and control flow
+def rec process(~id="default", ~timeout=30.0, source) =
+  if source.is_ready() then
+    source
+  elsif fallback_enabled then
+    fallback_source
+  else
+    blank()
+  end
+end
+
+let eval x = 1 + 2
+let replaces old_value = new_value
+
+# Literals and numbers
+let flag = true
+let empty = null
+let count = 42
+let hex = 0xDEADBEEF
+let octal = 0o755
+let binary = 0b101010
+let rate = 44100.0
+let scientific = 1.5e-3
+let version_check = 2.3.0
+
+# Strings with interpolation
+title = "Now playing: #{metadata['title']}"
+path = '/var/log/liquidsoap.log'
+
+# Time predicates and intervals
+on_air = 8h-18h
+jingle_time = 1h30m
+
+# Encoders
+output.file(%wav(stereo=true), "/tmp/out.wav", source)
+output.icecast(%mp3.vbr(quality=7), mount="/radio", source)
+output.icecast(%opus(bitrate=128), mount="/hq", source)
+
+# Preprocessor directives
+%ifdef ENABLE_HARBOR
+  input.harbor("live")
+%else
+  blank()
+%endif
+
+%ifencoder %ffmpeg
+  output.file(%ffmpeg(...), "out.mkv", source)
+%endif
+
+%include "library.liq"
+%include <utils.liq>
+
+# Regexp
+is_valid = r/^[a-z]+$/i
+
+# Decorators
+let @json.parse data = '{"key": "value"}'
+
+# Lambda functions
+let double = fun(x) -> x * 2
+let lazy_source = { fallback([live, playlist]) }
+
+# Pattern matching and records
+let (a, b) = (1, 2)
+let {name, age=0} = person
+let [head, ...tail] = items
+
+# Operators
+list = item :: rest
+value = ref := 42
+result = maybe ?? default
+safe_call = obj?.method()
+
+# Method calls and records
+source = source.{
+  title = "My Source",
+  on_metadata = fun(m) -> log("Got: #{m['title']}")
+}
+
+# Loops
+for i = 0 to 10 do
+  log("Count: #{i}")
+end
+
+while running do
+  process()
+end
+
+# Exception handling
+try
+  risky_operation()
+catch err do
+  log("Error: #{err}")
+finally
+  cleanup()
+end
+
+# Types in annotations
+def typed(x: int): string =
+  string.of_int(x)
+end
+
+# Labeled arguments
+output.icecast(
+  ~host="localhost",
+  ~port=8000,
+  %mp3,
+  source
+)
+
+# argsof
+def wrapper(%argsof(output.icecast), source) =
+  output.icecast(%argsof(output.icecast), source)
+end

@@ -1,0 +1,42 @@
+{
+  "name": "highlightjs-liquidsoap",
+  "version": "1.0.0",
+  "description": "Highlight.js grammar for Liquidsoap",
+  "main": "src/languages/liquidsoap.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/languages/liquidsoap.js",
+      "require": "./dist/liquidsoap.cjs"
+    }
+  },
+  "scripts": {
+    "test": "node tests/stdlib.test.js",
+    "generate-html": "node tests/generate-html.js",
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/savonet/highlightjs-liquidsoap.git"
+  },
+  "keywords": [
+    "highlightjs",
+    "highlight.js",
+    "liquidsoap",
+    "syntax",
+    "highlight"
+  ],
+  "author": "The Savonet Team",
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/savonet/highlightjs-liquidsoap/issues"
+  },
+  "homepage": "https://github.com/savonet/highlightjs-liquidsoap#readme",
+  "peerDependencies": {
+    "highlight.js": "^11.0.0"
+  },
+  "devDependencies": {
+    "glob": "^10.0.0",
+    "highlight.js": "^11.0.0"
+  }
+}

@@ -1,0 +1,26 @@
+# A simple liquidsoap radio script
+# @category Source
+
+settings.log.level := 3
+
+def my_playlist(~id="playlist", uri) =
+  playlist(id=id, uri)
+end
+
+live = input.harbor("live", port=8000)
+
+radio = fallback(track_sensitive=false, [
+  live,
+  my_playlist("/path/to/music")
+])
+
+radio = mksafe(radio)
+
+output.icecast(
+  %mp3(bitrate=128),
+  host="localhost",
+  port=8000,
+  password="hackme",
+  mount="/radio.mp3",
+  radio
+)
