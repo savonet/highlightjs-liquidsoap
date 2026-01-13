@@ -1,6 +1,6 @@
 node_modules/
 dist/
-tests/liquidsoap/
-tests/html-output/
+test/liquidsoap/
+test/html-output/
 *.log
 .DS_Store

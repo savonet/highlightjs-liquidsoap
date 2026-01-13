@@ -99,7 +99,7 @@ function escapeHtml(str) {
 
 async function main() {
   if (!fs.existsSync(LIQUIDSOAP_DIR)) {
-    console.error('Liquidsoap directory not found. Run tests/run.sh first.');
+    console.error('Liquidsoap directory not found. Run test/run.sh first.');
     process.exit(1);
   }
 

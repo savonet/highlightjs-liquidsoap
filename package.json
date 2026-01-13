@@ -11,8 +11,8 @@
     }
   },
   "scripts": {
-    "test": "node tests/stdlib.test.js",
-    "generate-html": "node tests/generate-html.js",
+    "test": "node test/index.js",
+    "generate-html": "node test/generate-html.js",
     "build": "rollup -c"
   },
   "repository": {

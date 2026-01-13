@@ -3,11 +3,13 @@
 
 settings.log.level := 3
 
+%ifdef ENABLE_HARBOR
 def my_playlist(~id="playlist", uri) =
   playlist(id=id, uri)
 end
 
 live = input.harbor("live", port=8000)
+%endif
 
 radio = fallback(track_sensitive=false, [
   live,
@@ -24,3 +26,7 @@ output.icecast(
   mount="/radio.mp3",
   radio
 )
+
+output.file(%opus(bitrate=192), "/tmp/archive.opus", radio)
+
+let @json.parse data = '{"key": "value"}'
