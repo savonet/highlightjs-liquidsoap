@@ -2,7 +2,7 @@
 Language: Liquidsoap
 Author: The Savonet Team
 Contributors: Romain Beauxis <toots@rastageeks.org>
-Description: Liquidsoap is a scripting language for audio streaming
+Description: Liquidsoap is a scripting language for audio and video streaming
 Website: https://www.liquidsoap.info
 Category: scripting
 */
