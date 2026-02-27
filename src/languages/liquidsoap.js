@@ -206,7 +206,7 @@ export default function(hljs) {
 
   const TYPE = {
     scope: 'type',
-    begin: /\b(?:int|float|bool|string|list|source|request|file|unit)\b/,
+    begin: /\b(?:int|float|bool|string|list|source|request|file|unit|ref|never)\b/,
     relevance: 0
   };
 
