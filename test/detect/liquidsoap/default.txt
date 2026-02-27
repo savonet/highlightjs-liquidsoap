@@ -29,4 +29,4 @@ output.icecast(
 
 output.file(%opus(bitrate=192), "/tmp/archive.opus", radio)
 
-let @json.parse data = '{"key": "value"}'
+let json.parse data = '{"key": "value"}'
