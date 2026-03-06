@@ -46,6 +46,10 @@ export default function(hljs) {
           hljs.BACKSLASH_ESCAPE,
           SUBST
         ]
+      },
+      {
+        begin: /\{[a-z_]*\|/,
+        end: /\|[a-z_]*\}/
       }
     ]
   };
